@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Banking - CashCompass</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      background-color: #f8f9fa;
+    }
+    .banking-form {
+      max-width: 400px;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .banking-form h2 {
+      font-size: 24px;
+      color: #4caf88;
+      margin-bottom: 20px;
+    }
+    .banking-form input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .banking-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf88;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .banking-form button:hover {
+      background-color: #45a068;
+    }
+  </style>
+</head>
+<body>
+  <div class="banking-form">
+    <h2>CashCompass Banking</h2>
+    <form id="bankingForm">
+      <input type="number" id="income" name="income" placeholder="Enter Income" required>
+      <input type="number" id="expense" name="expense" placeholder="Enter Expense" required>
+      <button type="submit">Calculate Balance</button>
+      <p id="balance-message" style="color: green;"></p>
+    </form>
+  </div>
+
+  <script>
+   document.getElementById('bankingForm').addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  const income = parseFloat(document.getElementById('income').value);
+  const expense = parseFloat(document.getElementById('expense').value);
+  const balanceMessage = document.getElementById('balance-message');
+
+  if (!isNaN(income) && !isNaN(expense)) {
+    const balance = income - expense;
+    balanceMessage.style.color = balance >= 0 ? 'green' : 'red';
+    balanceMessage.innerText = 'Your balance is: $' + balance.toFixed(2);
+
+    // Financial advice based on balance
+    const advice = document.createElement('p');
+    advice.id = 'financial-advice';
+
+    if (balance > 1000) {
+      advice.innerText = 'Great job! Consider investing a portion of your savings.';
+      advice.style.color = 'green';
+    } else if (balance > 0) {
+      advice.innerText = 'Good work! Aim to build an emergency fund.';
+      advice.style.color = 'blue';
+    } else {
+      advice.innerText = 'Your expenses exceed your income. Focus on cutting unnecessary costs.';
+      advice.style.color = 'red';
+    }
+
+    // Clear old advice if it exists
+    const oldAdvice = document.getElementById('financial-advice');
+    if (oldAdvice) {
+      oldAdvice.remove();
+    }
+
+    balanceMessage.insertAdjacentElement('afterend', advice);
+  } else {
+    balanceMessage.innerText = 'Please enter valid numbers for income and expense.';
+    balanceMessage.style.color = 'red';
+  }
+});
+
+  </script>
+</body>
+</html>

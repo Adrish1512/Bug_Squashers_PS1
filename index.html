@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CashCompass</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      color: #333;
+    }
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 10px 50px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    header img {
+      height: 60px;
+    }
+    header nav a {
+      text-decoration: none;
+      margin: 0 15px;
+      color: #333;
+      font-size: 16px;
+    }
+    .hero {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 50px;
+      background-color: #f8f9fa;
+    }
+    .hero-text {
+      max-width: 50%;
+    }
+    .hero-text h1 {
+      font-size: 36px;
+      color: #4caf88;
+    }
+    .hero-text p {
+      font-size: 18px;
+      margin: 20px 0;
+    }
+    .store-buttons img {
+      height: 50px;
+      margin-right: 15px;
+    }
+    .hero img {
+      max-width: 400px;
+      height: auto;
+    }
+    .features {
+      text-align: center;
+      padding: 50px;
+      background-color: #fff;
+    }
+    .features h2 {
+      color: #4caf88;
+      margin-bottom: 30px;
+    }
+    .features-cards {
+      display: flex;
+      justify-content: center;
+      gap: 20px;
+    }
+    .features-card {
+      background-color: #f5f8f5;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      width: 250px;
+      text-align: center;
+    }
+    .features-card img {
+      height: 50px;
+      margin-bottom: 15px;
+    }
+    .features-card h3 {
+      margin: 15px 0;
+      font-size: 18px;
+    }
+    .features-card p {
+      font-size: 16px;
+      color: #555;
+    }
+    .ratings {
+      margin-top: 30px;
+      font-size: 16px;
+      color: #555;
+    }
+    .ratings span {
+      font-size: 20px;
+      color: #4caf88;
+    }
+    .tagline {
+      margin-top: 20px;
+      font-size: 18px;
+      color: #4caf88;
+      font-weight: bold;
+    }
+    .money-shape {
+      padding: 50px;
+      background-color: #f8f9fa;
+    }
+    .money-shape h2 {
+      font-size: 24px;
+      color: #4caf88;
+      margin-bottom: 20px;
+      text-align: center;
+    }
+    .money-shape .steps {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+    .money-shape .step {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      padding: 20px;
+      text-align: center;
+      max-width: 300px;
+      flex: 1;
+    }
+    .money-shape .step h3 {
+      font-size: 18px;
+      color: #333;
+      margin-bottom: 10px;
+    }
+    .money-shape .step p {
+      font-size: 16px;
+      color: #555;
+    }
+    .money-shape .step img {
+      margin: 15px 0;
+      width: 100px;
+      height: auto;
+    }
+    /* Additional CSS for the login form */
+    .login-form {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .login-form h2 {
+      font-size: 24px;
+      color: #4caf88;
+      margin-bottom: 20px;
+    }
+    .login-form input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .login-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf88;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .login-form button:hover {
+      background-color: #45a068;
+    }
+
+    .banking-form {
+      max-width: 400px;
+      margin: 50px auto;
+      padding: 20px;
+      background-color: #fff;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      text-align: center;
+    }
+    .banking-form h2 {
+      font-size: 24px;
+      color: #4caf88;
+      margin-bottom: 20px;
+    }
+    .banking-form input {
+      width: calc(100% - 20px);
+      padding: 10px;
+      margin: 10px 0;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    .banking-form button {
+      width: 100%;
+      padding: 10px;
+      background-color: #4caf88;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .banking-form button:hover {
+      background-color: #45a068;
+    }
+
+    <style>
+  /* Default light theme */
+  body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    color: #333;
+    background-color: #fff;
+    transition: background-color 0.3s, color 0.3s;
+  }
+  
+  header {
+    background-color: #fff;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  header a {
+    color: #333;
+  }
+
+  .hero {
+    background-color: #f8f9fa;
+  }
+
+  .features {
+    background-color: #fff;
+  }
+
+  /* Dark theme */
+  body[data-theme="dark"] {
+    background-color: #121212;
+    color: #f0f0f0;
+  }
+
+  body[data-theme="dark"] header {
+    background-color: #333;
+    color: #f0f0f0;
+  }
+
+  body[data-theme="dark"] header a {
+    color: #f0f0f0;
+  }
+
+  body[data-theme="dark"] .hero {
+    background-color: #2c2c2c;
+  }
+
+  body[data-theme="dark"] .features {
+    background-color: #1e1e1e;
+  }
+
+  body[data-theme="dark"] .banking-form,
+  body[data-theme="dark"] .login-form {
+    background-color: #333;
+    color: #f0f0f0;
+  }
+
+  body[data-theme="dark"] .banking-form button,
+  body[data-theme="dark"] .login-form button {
+    background-color: #4caf88;
+    color: #fff;
+  }
+
+  /* Other dark theme styles */
+  body[data-theme="dark"] .features-card {
+    background-color: #333;
+    color: #f0f0f0;
+  }
+
+  body[data-theme="dark"] .ratings {
+    color: #f0f0f0;
+  }
+
+  body[data-theme="dark"] .tagline {
+    color: #4caf88;
+  }
+
+  body[data-theme="dark"] .money-shape {
+    background-color: #2c2c2c;
+  }
+
+  body[data-theme="dark"] .money-shape .step {
+    background-color: #333;
+    color: #f0f0f0;
+  }
+</style>
+
+  </style>
+</head>
+<body>
+  <header>
+    <img src="logo.png" alt="CashCompass Logo">
+    <img src="name.png">
+    <nav>
+      <a href="#pricing">Pricing</a>
+      <a href="banking.html" target="_blank">Banking</a>
+      <a href="#help">Help</a>
+      <a href="#about">About Us</a>
+      <a href="login.html" target="_blank">Login</a>
+    </nav>
+    <button id="theme-toggle" onclick="toggleTheme()">Switch to Dark Mode</button>
+  </header>
+  
+
+  <section class="hero">
+    <div class="hero-text">
+      <h1>Get Financial Management Directions at One Click</h1>
+      <p>Manage your finances efficiently with the CashCompass app. Track expenses, set budgets, and achieve financial goals.</p>
+      <div class="store-buttons">
+        <a href="https://play.google.com"><img src="playstore.png" alt="Google Play Store"></a>
+        <a href="https://www.apple.com/app-store/"><img src="appstore.png" alt="Apple App Store"></a>
+      </div>
+    </div>
+    <img src="phone.png" alt="App Mockup">
+  </section>
+
+  <section class="features">
+    <h2>Why Choose CashCompass?</h2>
+    <div class="features-cards">
+      <div class="features-card">
+        <img src="control.png" alt="Compass Icon">
+        <h3>Have Full Control</h3>
+        <p>Gain total control of your finances with our easy-to-use tools.</p>
+      </div>
+      <div class="features-card">
+        <img src="overview.png" alt="Overview Icon">
+        <h3>Get Quick Overview</h3>
+        <p>Understand your financial status at a glance.</p>
+      </div>
+      <div class="features-card">
+        <img src="budget.png" alt="Budget Icon">
+        <h3>Manage Budget Easily</h3>
+        <p>Create and stick to budgets effortlessly.</p>
+      </div>
+    </div>
+    <div class="ratings">
+      <p>⭐⭐⭐⭐ <span>4 out of 5 rated on Play Store</span></p>
+    </div>
+    <div class="tagline">
+      <p>How to get your money into shape?</p>
+    </div>
+  </section>
+
+  <section class="money-shape">
+    <h2>How to Get Your Money Into Shape?</h2>
+    <div class="steps">
+      <div class="step">
+        <h3>STEP 1:</h3>
+        <p>Connect your Bank Account to CASHCOMPASS.</p>
+        <p>Connect your E-Wallet for a complete overview.</p>
+        <p>Add your cash expenses manually.</p>
+      </div>
+      <div class="step">
+        <h3>STEP 2:</h3>
+        <p>Analyze your finance with beautiful, simple and easy to understand graphic. No need for complicated Excel sheets.</p>
+        <p>See where your money goes and where they come from every month.</p>
+        <p>See whether you spend less than you earn in one place and on 1 tap.</p>
+      </div>
+      <div class="step">
+        <h3>STEP 3:</h3>
+        <p>Set smart budgets to help you not to overspend in chosen category.</p>
+        <p>Know how much you can spend daily in order to stick to your budget.</p>
+        <p>Save money for your future dreams.</p>
+      </div>
+    </div>
+  </section>
+
+  <script>
+    function toggleTheme() {
+      const currentTheme = document.body.getAttribute('data-theme');
+      if (currentTheme === 'dark') {
+        document.body.setAttribute('data-theme', 'light');
+        document.getElementById('theme-toggle').innerText = 'Switch to Dark Mode';
+      } else {
+        document.body.setAttribute('data-theme', 'dark');
+        document.getElementById('theme-toggle').innerText = 'Switch to Light Mode';
+      }
+    }
+  
+    // Check for saved theme preference
+    if (localStorage.getItem('theme') === 'dark') {
+      document.body.setAttribute('data-theme', 'dark');
+      document.getElementById('theme-toggle').innerText = 'Switch to Light Mode';
+    } else {
+      document.body.setAttribute('data-theme', 'light');
+      document.getElementById('theme-toggle').innerText = 'Switch to Dark Mode';
+    }
+  
+    // Save theme preference to localStorage
+    document.body.addEventListener('data-theme', function() {
+      localStorage.setItem('theme', document.body.getAttribute('data-theme'));
+    });
+  </script>
+  
+</body>
+</html>
