@@ -15,6 +15,7 @@
       justify-content: center;
       height: 100vh;
       background-color: #f8f9fa;
+      flex-direction: column;
     }
     .banking-form {
       max-width: 400px;
@@ -23,6 +24,7 @@
       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
       border-radius: 10px;
       text-align: center;
+      margin-bottom: 20px;
     }
     .banking-form h2 {
       font-size: 24px;
@@ -48,7 +50,22 @@
     .banking-form button:hover {
       background-color: #45a068;
     }
+    .charts {
+      display: flex;
+      justify-content: center;
+      width: 100%;
+      max-width: 800px;
+    }
+    canvas {
+      background: #fff;
+      padding: 10px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      height: 300px;
+    }
   </style>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 <body>
   <div class="banking-form">
@@ -61,47 +78,80 @@
     </form>
   </div>
 
+  <div class="charts">
+    <canvas id="barChart"></canvas>
+  </div>
+
   <script>
-   document.getElementById('bankingForm').addEventListener('submit', function(event) {
-  event.preventDefault();
+    document.getElementById('bankingForm').addEventListener('submit', function(event) {
+      event.preventDefault();
 
-  const income = parseFloat(document.getElementById('income').value);
-  const expense = parseFloat(document.getElementById('expense').value);
-  const balanceMessage = document.getElementById('balance-message');
+      const income = parseFloat(document.getElementById('income').value);
+      const expense = parseFloat(document.getElementById('expense').value);
+      const balanceMessage = document.getElementById('balance-message');
 
-  if (!isNaN(income) && !isNaN(expense)) {
-    const balance = income - expense;
-    balanceMessage.style.color = balance >= 0 ? 'green' : 'red';
-    balanceMessage.innerText = 'Your balance is: $' + balance.toFixed(2);
+      if (!isNaN(income) && !isNaN(expense)) {
+        const balance = income - expense;
+        balanceMessage.style.color = balance >= 0 ? 'green' : 'red';
+        balanceMessage.innerText = 'Your balance is: $' + balance.toFixed(2);
 
-    // Financial advice based on balance
-    const advice = document.createElement('p');
-    advice.id = 'financial-advice';
+        // Update Bar Chart
+        updateBarChart([income, expense, balance]);
 
-    if (balance > 1000) {
-      advice.innerText = 'Great job! Consider investing a portion of your savings.';
-      advice.style.color = 'green';
-    } else if (balance > 0) {
-      advice.innerText = 'Good work! Aim to build an emergency fund.';
-      advice.style.color = 'blue';
-    } else {
-      advice.innerText = 'Your expenses exceed your income. Focus on cutting unnecessary costs.';
-      advice.style.color = 'red';
+        // Financial advice based on balance
+        const advice = document.createElement('p');
+        advice.id = 'financial-advice';
+
+        if (balance > 1000) {
+          advice.innerText = 'Great job! Consider investing a portion of your savings.';
+          advice.style.color = 'green';
+        } else if (balance > 0) {
+          advice.innerText = 'Good work! Aim to build an emergency fund.';
+          advice.style.color = 'blue';
+        } else {
+          advice.innerText = 'Your expenses exceed your income. Focus on cutting unnecessary costs.';
+          advice.style.color = 'red';
+        }
+
+        // Clear old advice if it exists
+        const oldAdvice = document.getElementById('financial-advice');
+        if (oldAdvice) {
+          oldAdvice.remove();
+        }
+
+        balanceMessage.insertAdjacentElement('afterend', advice);
+      } else {
+        balanceMessage.innerText = 'Please enter valid numbers for income and expense.';
+        balanceMessage.style.color = 'red';
+      }
+    });
+
+    // Initialize Bar Chart
+    const barChartCtx = document.getElementById('barChart').getContext('2d');
+    let barChart = new Chart(barChartCtx, {
+      type: 'bar',
+      data: {
+        labels: ['Income', 'Expense', 'Balance'],
+        datasets: [{
+          label: 'Amount',
+          data: [0, 0, 0],
+          backgroundColor: ['#4caf88', '#f44336', '#ff9800'] // Added unique colors for each bar
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true
+          }
+        }
+      }
+    });
+
+    function updateBarChart(data) {
+      barChart.data.datasets[0].data = data;
+      barChart.update();
     }
-
-    // Clear old advice if it exists
-    const oldAdvice = document.getElementById('financial-advice');
-    if (oldAdvice) {
-      oldAdvice.remove();
-    }
-
-    balanceMessage.insertAdjacentElement('afterend', advice);
-  } else {
-    balanceMessage.innerText = 'Please enter valid numbers for income and expense.';
-    balanceMessage.style.color = 'red';
-  }
-});
-
   </script>
 </body>
 </html>
