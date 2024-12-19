@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Help - CashCompass</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f8f9fa;
+      color: #333;
+    }
+    h1 {
+      text-align: center;
+      color: #4caf88;
+    }
+    .faq {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 10px;
+    }
+    .faq-item {
+      margin: 10px 0;
+      padding: 15px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .faq-item:hover {
+      background-color: #f1f1f1;
+    }
+    .faq-answer {
+      display: none;
+      margin-top: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border-left: 3px solid #4caf88;
+    }
+  </style>
+</head>
+<body>
+  <h1>Frequently Asked Questions</h1>
+  <div class="faq">
+    <div class="faq-item" onclick="toggleAnswer(1)">
+      <strong>1. What is CashCompass?</strong>
+      <div id="answer-1" class="faq-answer">
+        CashCompass is a financial management app that helps you track expenses, set budgets, and achieve financial goals.
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleAnswer(3)">
+      <strong>2. How do I connect my bank account?</strong>
+      <div id="answer-3" class="faq-answer">
+        Navigate to the "Banking" section in the app, choose your bank, and follow the secure authentication process.
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleAnswer(4)">
+      <strong>3. Can I manually add expenses?</strong>
+      <div id="answer-4" class="faq-answer">
+        Yes, you can manually add expenses through the "Add Expense" option in the app.
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleAnswer(5)">
+      <strong>4. How secure is my data?</strong>
+      <div id="answer-5" class="faq-answer">
+        CashCompass uses advanced encryption to ensure that your data is safe and secure.
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleAnswer(6)">
+      <strong>5. Can I set spending limits?</strong>
+      <div id="answer-6" class="faq-answer">
+        Yes, you can set spending limits in different categories using the budgeting feature.
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleAnswer(7)">
+      <strong>6. Does CashCompass support multiple currencies?</strong>
+      <div id="answer-7" class="faq-answer">
+        Yes, CashCompass supports multiple currencies and automatically converts them based on the latest rates.
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleAnswer(8)">
+      <strong>7. How do I reset my password?</strong>
+      <div id="answer-8" class="faq-answer">
+        Click on "Forgot Password" on the login page and follow the instructions to reset your password.
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleAnswer(9)">
+      <strong>8. Can I export my financial data?</strong>
+      <div id="answer-9" class="faq-answer">
+        Yes, you can export your data as a CSV file from the "Settings" menu.
+      </div>
+    </div>
+    <div class="faq-item" onclick="toggleAnswer(10)">
+      <strong>9. Who do I contact for support?</strong>
+      <div id="answer-10" class="faq-answer">
+        You can reach out to our support team via the "Help" section in the app or email support@cashcompass.com.
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function toggleAnswer(id) {
+      const answer = document.getElementById(`answer-${id}`);
+      if (answer.style.display === "none" || !answer.style.display) {
+        answer.style.display = "block";
+      } else {
+        answer.style.display = "none";
+      }
+    }
+  </script>
+</body>
+</html>
