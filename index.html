@@ -298,23 +298,93 @@
     background-color: #333;
     color: #f0f0f0;
   }
+  /* Theme Toggle Switch Styles */
+  .theme-switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 25px;
+  }
+
+  .theme-switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 25px;
+  }
+
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 20px;
+    width: 20px;
+    left: 5px;
+    bottom: 2.5px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+
+  input:checked + .slider {
+    background-color: #4caf88;
+  }
+
+  input:checked + .slider:before {
+    transform: translateX(25px);
+  }
+
+  /* Light and Dark Theme Colors */
+  body[data-theme="light"] {
+    background-color: #f8f9fa;
+    color: #333;
+  }
+
+  body[data-theme="dark"] {
+    background-color: #333;
+    color: #f8f9fa;
+  }
+
+  header[data-theme="dark"] {
+    background-color: #444;
+  }
+
+  nav a[data-theme="dark"] {
+    color: #f8f9fa;
+  }
+
 </style>
 
   </style>
 </head>
 <body>
-  <header>
-    <img src="logo.png" alt="CashCompass Logo">
-    <img src="name.png">
-    <nav>
-      <a href="#pricing">Pricing</a>
-      <a href="banking.html" target="_blank">Banking</a>
-      <a href="#help">Help</a>
-      <a href="#about">About Us</a>
-      <a href="login.html" target="_blank">Login</a>
-    </nav>
-    <button id="theme-toggle" onclick="toggleTheme()">Switch to Dark Mode</button>
-  </header>
+ <header>
+  <img src="logo.png" alt="CashCompass Logo">
+  <img src="name.png">
+  <nav>
+    <a href="#pricing">Pricing</a>
+    <a href="banking.html">Banking</a>
+    <a href="#help">Help</a>
+    <a href="#about">About Us</a>
+    <a href="login.html">Login</a>
+  </nav>
+  <!-- Theme Toggle Switch -->
+  <label class="theme-switch">
+    <input type="checkbox" id="theme-toggle" onchange="toggleTheme()">
+    <span class="slider"></span>
+  </label>
+</header>
+
   
 
   <section class="hero">
@@ -405,6 +475,23 @@
     document.body.addEventListener('data-theme', function() {
       localStorage.setItem('theme', document.body.getAttribute('data-theme'));
     });
+    function toggleTheme() {
+    const isDarkMode = document.getElementById("theme-toggle").checked;
+    if (isDarkMode) {
+      document.body.setAttribute("data-theme", "dark");
+      localStorage.setItem("theme", "dark");
+    } else {
+      document.body.setAttribute("data-theme", "light");
+      localStorage.setItem("theme", "light");
+    }
+  }
+
+  // Apply the saved theme on page load
+  window.onload = function () {
+    const savedTheme = localStorage.getItem("theme") || "light";
+    document.body.setAttribute("data-theme", savedTheme);
+    document.getElementById("theme-toggle").checked = savedTheme === "dark";
+  };
   </script>
   
 </body>
